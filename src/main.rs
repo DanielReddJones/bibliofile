@@ -1,6 +1,7 @@
 use std::fs::File;
 use std::io::prelude::*;
 use std::env;
+use ncurses;
 
 fn main() -> std::io::Result<()>  {
     let args: Vec<String> = env::args().collect();
