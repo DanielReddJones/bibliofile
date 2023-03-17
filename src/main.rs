@@ -35,7 +35,13 @@ fn main() -> std::io::Result<()>  {
 //screen init function
 fn screen(line: &str){
     
+    let mut stdscr: i8 = 0;
+    let mut w: i32 = 0; //width
+    let mut h: i32 = 0; //height
+    ncurses::getmaxyx(&mut stdscr, &mut h, &mut w);
+
     ncurses::initscr();
+    ncurses::clear();
     ncurses::addstr(line);
     ncurses::refresh();
     ncurses::getch();
