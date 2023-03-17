@@ -24,8 +24,8 @@ fn main() -> std::io::Result<()>  {
     let mut contents = String::new();
     file.read_to_string(&mut contents).expect("unreadable file.");
 
-    println!("{}", contents);
-    screen();
+    
+    screen(&contents);
     Ok(())
 
     
@@ -33,10 +33,10 @@ fn main() -> std::io::Result<()>  {
 
 
 //screen init function
-fn screen(){
-
+fn screen(line: &str){
+    
     ncurses::initscr();
-    ncurses::addstr("Hello World!");
+    ncurses::addstr(line);
     ncurses::refresh();
     ncurses::getch();
     ncurses::endwin();
