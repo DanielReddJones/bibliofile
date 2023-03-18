@@ -12,6 +12,7 @@ use std::fs;
 use std::io::prelude::*;
 use std::env;
 extern crate ncurses;
+extern crate termsize;
 
 
 //initial function. Reads the ebook passed by argument.
@@ -23,20 +24,13 @@ fn main() {
 
 }
 
-fn get_terminal_size()-> (i8, i32, i32){
-
-    let mut stdscr: i8 = 0;
-    let mut w: i32 = 0; //width
-    let mut h: i32 = 0; //height
-    ncurses::getmaxyx(&mut stdscr, &mut h, &mut w);
-
-    return (stdscr, h, w);
-}
-
 
 
 //Gets files in directory and returns string with contents.
 fn get_directory() -> String{
+
+    
+
 
     let mut dir: String = "".to_string();
     let mut hold: String;
@@ -50,13 +44,18 @@ fn get_directory() -> String{
     return dir;
 }
 
+
+//Generates menu screen
 fn menu(){
- 
-    let (mut stdscr, height, width): (i8, i32, i32) = get_terminal_size();
+    let termsize::Size {mut rows, mut cols} = termsize::get().unwrap();
+
     
+    println!("height: {} \nwidth: {} \n", rows, cols);
+    rows -= 5;
+    cols -= 5;
     ncurses::initscr();
     ncurses::clear();
-    let win = ncurses::newwin(100, 100, 5, 5);
+    let win = ncurses::newwin(rows as i32, cols as i32, 0, 0);
     ncurses::wprintw(win, &get_directory());
     ncurses::refresh();
     ncurses::box_(win, 0, 0);
