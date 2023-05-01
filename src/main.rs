@@ -1,10 +1,10 @@
 /*
 Program: Bibliofile
-Language: Rustc 1.68.0
+Language: Rustc 1.69.0
 ide: Visual Studio Code
-Operating system: 
+Operating system: Fedora 38/WSL
 Purpose: ncurses based ereader and library manager for Linux terminal environments. 
-Last edited: 9:55 PM 5/1/23
+Last edited: 5/1/23
 */
 
 use epub::doc::EpubDoc;
@@ -27,11 +27,15 @@ fn main() {
 
 //parses epub files
 fn epub(epub_file: &str){
-
+    let item_count = 0;
     println!("{}", epub_file);
     let doc = EpubDoc::new(&epub_file);
     assert!(doc.is_ok());
     let doc = doc.unwrap();
+    assert_eq!(105, doc.spine.len());
+    let page = &doc.spine[item_count];
+    let text = doc.resources.get(page);
+    println!("{:?}", text);
 }
 
 
