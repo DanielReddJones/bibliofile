@@ -8,11 +8,7 @@ Last edited: 5/1/23
 */
 
 use epub::doc::EpubDoc;
-use std::fs;
-use std::io::prelude::*;
 use std::env;
-extern crate ncurses; //display framework
-extern crate termsize; //makes sure ncurses border maches term size
 
 
 //initial function. Reads the ebook passed by argument.
@@ -27,15 +23,17 @@ fn main() {
 
 //parses epub files
 fn epub(epub_file: &str){
-    let item_count = 0;
+    let item_count = 1;
     println!("{}", epub_file);
     let doc = EpubDoc::new(&epub_file);
     assert!(doc.is_ok());
-    let doc = doc.unwrap();
-    assert_eq!(105, doc.spine.len());
-    let page = &doc.spine[item_count];
-    let text = doc.resources.get(page);
-    println!("{:?}", text);
+    let mut doc = doc.unwrap();
+    doc.set_current_page(50);
+    let content = doc.get_current_str();
+    
+    
+    println!("{:?}", content);
+    
 }
 
 
