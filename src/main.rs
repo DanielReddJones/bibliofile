@@ -9,6 +9,7 @@ Last edited: 5/1/23
 
 use epub::doc::EpubDoc;
 use std::env;
+use std::io;
 
 
 //initial function. Reads the ebook passed by argument.
@@ -24,15 +25,27 @@ fn main() {
 //parses epub files
 fn epub(epub_file: &str){
     let item_count = 1;
-    println!("{}", epub_file);
     let doc = EpubDoc::new(&epub_file);
     assert!(doc.is_ok());
     let mut doc = doc.unwrap();
     doc.set_current_page(50);
     let content = doc.get_current_str();
     
+    while(true){
+        let mut next = String::new();
+
+        io::stdin()
+        .read_line(&mut next)
+        .expect("Failed to read line");
+        if next == "n"{
+            doc.go_next();
+            println!("{:?}", content);
+        }
+        
+        
+    }
     
-    println!("{:?}", content);
+    
     
 }
 
