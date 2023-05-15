@@ -1,15 +1,18 @@
 /*
 Program: Bibliofile
 Language: Rustc 1.69.0
-ide: Visual Studio Code
+ide: CLion
 Operating system: Fedora 38/WSL
 Purpose: ncurses based ereader and library manager for Linux terminal environments. 
-Last edited: 5/1/23
+Last edited: 5/15/23
 */
 
-use epub::doc::EpubDoc;
+
+mod html_module;
+use epub::doc::EpubDoc; //library for navigating epubs
 use std::env;
 use std::io;
+
 
 
 //initial function. Reads the ebook passed by argument.
@@ -31,19 +34,20 @@ fn epub(epub_file: &str){
     doc.set_current_page(50);
     let content = doc.get_current_str();
     
-    while(true){
+    //while true{
         let mut next = String::new();
 
         io::stdin()
         .read_line(&mut next)
         .expect("Failed to read line");
-        if next == "n"{
+        //if next == "n"{
             doc.go_next();
             println!("{:?}", content);
-        }
+        //}
+
+        html_module::main();
         
-        
-    }
+    //}
     
     
     
