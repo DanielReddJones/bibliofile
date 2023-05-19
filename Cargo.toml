@@ -7,4 +7,5 @@ edition = "2021"
 
 [dependencies]
 epub = "1.2.2"
-horrorshow = "0.8.4"
+regex = "1.8.1"
+soup = "0.5.1"

@@ -12,7 +12,7 @@ mod html_module;
 use epub::doc::EpubDoc; //library for navigating epubs
 use std::env;
 use std::io;
-use horrorshow::Template;
+
 
 
 //initial function. Reads the ebook passed by argument.
@@ -38,8 +38,8 @@ fn epub_func(epub_file: &str){
 
 
 
-            str_content = html_module::main(str_content);
-            println!("{}", str_content);
+            let page = html_module::main(str_content);
+            println!("{}", page);
     
 }
 
