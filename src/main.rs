@@ -4,7 +4,7 @@ Language: Rustc 1.69.0
 ide: CLion
 Operating system: Fedora 38/WSL
 Purpose: ncurses based ereader and library manager for Linux terminal environments. 
-Last edited: 5/18/23
+Last edited: 5/19/23
 */
 
 
@@ -31,10 +31,9 @@ fn epub_func(epub_file: &str){
     let doc = EpubDoc::new(&epub_file);
     assert!(doc.is_ok());
     let mut doc = doc.unwrap();
-    doc.set_current_page(50);
+    doc.set_current_page(1).expect("end of book");
     let mut content = doc.get_current_str();
     let mut str_content = content.unwrap();
-    let mut next = String::new();
 
 
 
