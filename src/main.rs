@@ -11,35 +11,71 @@ Last edited: 5/19/23
 mod html_module;
 use epub::doc::EpubDoc; //library for navigating epubs
 use std::env;
-use std::io;
-
+use std::process::exit;
 
 
 //initial function. Reads the ebook passed by argument.
 //TODO: add visual library to pull up ebooks.
 fn main() {
-    let args: Vec<String> = env::args().collect();
-    let filename = &args[1];
-    epub_func(filename);
 
+
+    if env::args().len() == 1 {
+        println!("you need to enter a book. Closing program.");
+    }
+    else {
+        let args: Vec<String> = env::args().collect();
+        let filename = &args[1];
+        epub_func(filename);
+    }
 }
 
 
 //parses epub files
 fn epub_func(epub_file: &str){
-    //let item_count = 1;
+
     let doc = EpubDoc::new(&epub_file);
     assert!(doc.is_ok());
     let mut doc = doc.unwrap();
-    doc.set_current_page(1).expect("end of book");
-    let mut content = doc.get_current_str();
-    let mut str_content = content.unwrap();
 
+    let mut page_num = 1;
+    let is_reading = true;
+    while is_reading == true {
+        let mut next_or_last = String::new();
+        doc.set_current_page(page_num).expect("end of book");
 
+        let content = doc.get_current_str();
+        let str_content = content.unwrap();
+        let page = html_module::main(str_content);
+        println!("{}", page);
 
-            let page = html_module::main(str_content);
-            println!("{}", page);
-    
+        let input_size = std::io::stdin().read_line(&mut next_or_last);
+        let input_size_len = input_size.unwrap() - 1;
+        if input_size_len == 1{
+            let compare = next_or_last.as_bytes();
+            if compare[0] == 110  {
+                page_num = page_num + 1;
+            }
+            else if compare[0] == 98 {
+                //if page number equals one then you are at the beginning of the book.
+                if page_num == 1 {
+                    println!("at beginning of book.");
+                }
+                else {
+                    page_num = page_num - 1;
+                }
+            }
+                else if compare[0] == 113 {
+                    println!("quitting...");
+                    exit(0);
+                }
+            else {
+                println!("did not understand command.");
+            }
+        }
+        else {
+            println!("Do not understand input. Try again.");
+        }
+    }
 }
 
 

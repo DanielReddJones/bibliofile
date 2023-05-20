@@ -13,10 +13,10 @@ Last edited: 5/19/23
  - convert html module to python script, use python version of soup
  - convert html by hand(absolutely not)
  */
-use soup::{NodeExt, QueryBuilderExt, Soup};
+use soup::{Soup};
 
 pub fn main(content: String) -> String {
-    let mut str_content = content;
+    let str_content = content;
     let soup = Soup::new(&str_content);
     let page = soup.text();
     return page;
