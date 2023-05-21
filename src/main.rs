@@ -9,6 +9,8 @@ Last edited: 5/19/23
 
 
 mod html_module;
+mod ncurses_module;
+
 use epub::doc::EpubDoc; //library for navigating epubs
 use std::env;
 use std::process::exit;
@@ -17,14 +19,13 @@ use std::process::exit;
 //initial function. Reads the ebook passed by argument.
 //TODO: add visual library to pull up ebooks.
 fn main() {
-
-
     if env::args().len() == 1 {
         println!("you need to enter a book. Closing program.");
     }
     else {
         let args: Vec<String> = env::args().collect();
         let filename = &args[1];
+        ncurses_module::main();
         epub_func(filename);
     }
 }
@@ -51,10 +52,19 @@ fn epub_func(epub_file: &str){
         let input_size = std::io::stdin().read_line(&mut next_or_last);
         let input_size_len = input_size.unwrap() - 1;
         if input_size_len == 1{
+
+            /*
+            Was not sure how to compare string to input from .read_line
+            Instead, I felt that it would be easier to convert it to bytes and
+            compare the ASCII values.
+             */
             let compare = next_or_last.as_bytes();
+
+            //If user presses n(for next) goes forward one page.
             if compare[0] == 110  {
                 page_num = page_num + 1;
             }
+            //if user presses b, goes back one page.
             else if compare[0] == 98 {
                 //if page number equals one then you are at the beginning of the book.
                 if page_num == 1 {
@@ -64,6 +74,7 @@ fn epub_func(epub_file: &str){
                     page_num = page_num - 1;
                 }
             }
+                //If user presses q(for quit), exits with status code of 0.
                 else if compare[0] == 113 {
                     println!("quitting...");
                     exit(0);
