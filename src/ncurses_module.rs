@@ -9,8 +9,12 @@ Last edited: 5/20/23
 
 
 use ncurses;
+use ncurses::{initscr, WINDOW};
 
-pub fn main() {
+pub fn main(text: String) {
 
+
+    initscr();
+    ncurses::addstr(&*text);
     println!("If you can read this, you are in the ncurses_module");
 }

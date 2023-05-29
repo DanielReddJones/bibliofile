@@ -25,7 +25,6 @@ fn main() {
     else {
         let args: Vec<String> = env::args().collect();
         let filename = &args[1];
-        ncurses_module::main();
         epub_func(filename);
     }
 }
@@ -33,7 +32,7 @@ fn main() {
 
 //parses epub files
 fn epub_func(epub_file: &str){
-
+    
     let doc = EpubDoc::new(&epub_file);
     assert!(doc.is_ok());
     let mut doc = doc.unwrap();
@@ -48,6 +47,7 @@ fn epub_func(epub_file: &str){
         let str_content = content.unwrap();
         let page = html_module::main(str_content);
         println!("{}", page);
+        ncurses_module::main(page);
 
         let input_size = std::io::stdin().read_line(&mut next_or_last);
         let input_size_len = input_size.unwrap() - 1;
