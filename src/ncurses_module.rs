@@ -11,10 +11,12 @@ Last edited: 5/20/23
 use ncurses;
 use ncurses::{initscr, WINDOW};
 
-pub fn main(text: String) {
+pub fn main(mut text: String) {
 
-
+    ncurses::clear();
     initscr();
     ncurses::addstr(&*text);
+
+    ncurses::refresh();
     println!("If you can read this, you are in the ncurses_module");
 }

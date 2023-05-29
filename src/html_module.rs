@@ -15,7 +15,7 @@ Last edited: 5/20/23
  */
 use soup::{Soup};
 
-pub fn main(content: String) -> String {
+pub fn main(content: &str) -> String {
     let str_content = content;
     let soup = Soup::new(&str_content);
     let page = soup.text();

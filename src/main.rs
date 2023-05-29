@@ -41,12 +41,11 @@ fn epub_func(epub_file: &str){
     let is_reading = true;
     while is_reading == true {
         let mut next_or_last = String::new();
-        doc.set_current_page(page_num).expect("end of book");
+        doc.set_current_page(page_num);
 
         let content = doc.get_current_str();
         let str_content = content.unwrap();
-        let page = html_module::main(str_content);
-        println!("{}", page);
+        let page = html_module::main(&str_content.0);
         ncurses_module::main(page);
 
         let input_size = std::io::stdin().read_line(&mut next_or_last);
