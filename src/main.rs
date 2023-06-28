@@ -9,7 +9,7 @@ Last edited: 5/19/23
 
 
 mod html_module;
-mod ncurses_module;
+
 
 use epub::doc::EpubDoc; //library for navigating epubs
 use std::env;
@@ -25,7 +25,7 @@ fn main() {
     else {
         let args: Vec<String> = env::args().collect();
         let filename = &args[1];
-        ncurses_module::main();
+
         epub_func(filename);
     }
 }

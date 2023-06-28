@@ -8,4 +8,5 @@ edition = "2021"
 [dependencies]
 epub = "1.2.2"
 ncurses = "5.101.0"
-soup = "0.5.1"
+scraper = "0.17.1"
+
