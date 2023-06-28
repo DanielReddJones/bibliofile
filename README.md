@@ -1,5 +1,5 @@
 # Bibliofile
-A TUI-based ebook reader that hopefully doesn't suck!
+### A TUI-based ebook reader that hopefully doesn't suck!
 
 A long long time ago, I was in college. I frequently bought the ebook versions of my textbooks, but to my dismay...most ebook readers sucked. The user interface was complicated, dark mode was unavailable for most readers until I neared graduation, dark mode usually looked terrible even if it was available, etc. I hope to change that. What better dark mode that running it on the TUI? What better way to make a simple UI than to design one myself that *I* like?
 
