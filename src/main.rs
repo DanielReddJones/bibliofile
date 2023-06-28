@@ -1,10 +1,10 @@
 /*
 Program: Bibliofile
-Language: Rustc 1.69.0
+Language: Rustc 1.70.0
 ide: CLion
 Operating system: Fedora 38/WSL
 Purpose: ncurses based ereader and library manager for Linux terminal environments. 
-Last edited: 5/19/23
+Last edited: 6/28/23
 */
 
 
