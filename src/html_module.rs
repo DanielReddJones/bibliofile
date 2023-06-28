@@ -9,12 +9,17 @@ Last edited: 6/28/23
 
 use scraper::{Html, Selector};
 
-pub fn main(content: String) -> String {
-    let str_content = content;
+pub fn main(content: String){
 
-    println!("{}", str_content);
 
-    let page = str_content;
+  let str_content = Html::parse_document(&content);
+  let selector = Selector::parse("html").unwrap();
 
-    return page;
+  let unwrapped_page = str_content.select(&selector).next().unwrap();
+  let page = unwrapped_page.text().collect::<Vec<_>>();
+  for i in 0..page.len() {
+    println!("{}", page[i]);
+  }
+
+
 }

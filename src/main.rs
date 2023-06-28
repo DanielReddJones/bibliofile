@@ -46,8 +46,8 @@ fn epub_func(epub_file: &str){
 
         let content = doc.get_current_str();
         let str_content = content.unwrap();
-        let page = html_module::main(str_content);
-        println!("{}", page);
+        html_module::main(str_content);
+
 
         let input_size = std::io::stdin().read_line(&mut next_or_last);
         let input_size_len = input_size.unwrap() - 1;
